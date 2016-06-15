@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="io.nivad.nivadpushnotificationssample"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <permission android:name="io.nivad.nivadpushnotificationssample.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="io.nivad.nivadpushnotificationssample.permission.C2D_MESSAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="io.nivad.push" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="io.nivad.push.Notification.NotificationDismissReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="io.nivad.push.notification_dismiss" />
+                <category android:name="io.nivad.push" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="io.nivad.push.Notification.NotificationClickReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="io.nivad.push.notification_click" />
+                <category android:name="io.nivad.push" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="io.nivad.push.GCMListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name="io.nivad.push.RegistrationService"
+            android:exported="false" >
+        </service>
+
+        <service
+            android:name="io.nivad.push.InstanceIDService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="io.nivad.push.application_id"
+            android:value="(608200520721"/>
+
+    </application>
+
+</manifest>

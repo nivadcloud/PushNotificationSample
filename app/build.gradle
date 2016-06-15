@@ -1,0 +1,36 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        applicationId "io.nivad.nivadpushnotificationssample"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    // This compiles the NivadPushNotifications library placed in project_directory/app/libs
+    compile files('libs/nivad_push_notifications.jar')
+    // Nivad Dependencies:
+    // AppCompat is required for displaying notifications among other things
+    // you'll probably end up including it anyway
+    compile 'com.android.support:appcompat-v7:23.2.1'
+    // provides the google GCM service
+    compile "com.google.android.gms:play-services-gcm:8.4.0"
+    // JWT is an authentication mechanism used to verify the sender's identity
+    compile 'com.auth0:java-jwt:2.1.0'
+    // Optional, used for CoordinatorLayout in MainActivity
+    compile 'com.android.support:design:23.2.1'
+}
